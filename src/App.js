@@ -24,6 +24,7 @@ class App extends Component {
           <div className="col">
             <QrCode
               value="This is a test value from app"
+              size={150}
             />
           </div>
         </div>

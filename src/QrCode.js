@@ -4,15 +4,19 @@ import React, { Component } from 'react';
 import QRious from 'qrious';
 
 type Props = {
+  size: number,
   value: string,
 };
 
 class QrCode extends Component {
   props: {
+    size: number,
     value: string,
   };
 
   static defaultProps = {
+    size: 100,
+    value: '',
   };
 
   componentDidMount() {
@@ -33,6 +37,7 @@ class QrCode extends Component {
     if (this.canvas) {
       new QRious({
         element: this.canvas,
+        size: this.props.size,
         value: this.props.value,
       });
     }
