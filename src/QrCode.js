@@ -3,11 +3,6 @@
 import React, { Component } from 'react';
 import QRious from 'qrious';
 
-type Props = {
-  size: number,
-  value: string,
-};
-
 class QrCode extends Component {
   props: {
     size: number,
@@ -25,12 +20,6 @@ class QrCode extends Component {
 
   componentDidUpdate() {
     this.update();
-  }
-
-  shouldComponentUpdate(nextProps: Props) {
-    return Object.keys(QrCode.propTypes).some(
-      k => this.props[k] !== nextProps[k]
-    );
   }
 
   update() {

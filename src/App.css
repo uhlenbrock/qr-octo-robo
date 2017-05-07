@@ -4,3 +4,15 @@
   left: 0;
   right: 0;
 }
+
+.qr-code-card {
+  margin: 40px auto;
+  width: 150px;
+}
+
+.qr-code-card__label {
+  margin-bottom: 10px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
