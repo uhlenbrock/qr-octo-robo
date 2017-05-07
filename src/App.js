@@ -6,32 +6,56 @@ import QrCode from './QrCode';
 import './App.css';
 
 class App extends Component {
-  state = {
-    qrCodes: [],
-    addQrCodeValue: '',
-  };
+  constructor(...props) {
+    super(...props);
+
+    let qrCodes = [];
+
+    try {
+      qrCodes = JSON.parse(localStorage.qrCodes);
+    } catch (err) {
+      console.error(err);
+    }
+
+    this.state = {
+      qrCodes,
+      addQrCodeValue: '',
+    };
+  }
+
+  saveCodesToStorage(qrCodes){
+    try {
+      localStorage.setItem('qrCodes', JSON.stringify(qrCodes));
+    } catch (err) {
+      console.error(err);
+    }
+  }
 
   handleAddQrCode = (evt) => {
     evt.preventDefault();
 
-    const { qrCodes, addQrCodeValue } = this.state;
+    let { qrCodes, addQrCodeValue } = this.state;
 
     if (addQrCodeValue !== '') {
+      qrCodes = qrCodes.concat([ addQrCodeValue ]);
       this.setState({
         addQrCodeValue: '',
-        qrCodes: qrCodes.concat([ addQrCodeValue ]),
+        qrCodes: qrCodes,
       });
+      this.saveCodesToStorage(qrCodes);
     }
   }
 
   removeQrCode = (index) => {
     return () => {
+      let qrCodes = [
+        ...this.state.qrCodes.slice(0, index),
+        ...this.state.qrCodes.slice(index + 1),
+      ];
       this.setState({
-        qrCodes: [
-          ...this.state.qrCodes.slice(0, index),
-          ...this.state.qrCodes.slice(index + 1),
-        ]
-      })
+        qrCodes
+      });
+      this.saveCodesToStorage(qrCodes);
     };
   }
 
