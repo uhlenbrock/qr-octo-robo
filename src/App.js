@@ -24,9 +24,20 @@ class App extends Component {
     }
   }
 
+  removeQrCode = (index) => {
+    return () => {
+      this.setState({
+        qrCodes: [
+          ...this.state.qrCodes.slice(0, index),
+          ...this.state.qrCodes.slice(index + 1),
+        ]
+      })
+    };
+  }
+
   renderHeader() {
     return (
-      <nav className="navbar navbar-inverse sticky-top bg-primary">
+      <nav className="navbar navbar-inverse bg-primary">
         <div className="container">
           <span className="navbar-brand">QR Octo Robo</span>
           <span className="navbar-text">a library of your QR codes</span>
@@ -37,7 +48,7 @@ class App extends Component {
 
   renderBody() {
     return (
-      <div className="container mt-4">
+      <div className="app__body container mt-4">
         <div className="row">
           <div className="col">
             {this.renderAddQrCodeForm()}
@@ -86,8 +97,13 @@ class App extends Component {
     return (
       <div key={index} className="col-sm-6 col-md-4 col-lg-3">
         <div className="qr-code-card">
-          <div className="qr-code-card__label" title={qrCode}>
-            {qrCode}
+          <div className="qr-code-card__heading">
+            <div className="qr-code-card__label" title={qrCode}>
+              {qrCode}
+            </div>
+            <button onClick={this.removeQrCode(index)} type="button" className="close" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
           </div>
           <QrCode
             value={qrCode}
@@ -100,7 +116,7 @@ class App extends Component {
 
   render() {
     return (
-      <div>
+      <div className="app">
         {this.renderHeader()}
         {this.renderBody()}
         {this.renderFooter()}

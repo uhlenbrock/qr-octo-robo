@@ -1,8 +1,11 @@
-.footer {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
+.app {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+.app__body {
+  flex: 1;
 }
 
 .qr-code-card {
@@ -10,8 +13,13 @@
   width: 150px;
 }
 
-.qr-code-card__label {
+.qr-code-card__heading {
   margin-bottom: 10px;
+}
+
+.qr-code-card__label {
+  display: inline-block;
+  width: 130px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
